@@ -1,4 +1,3 @@
-// Drug.java
 public class Drug {
     private int drugId;
     private String drugName;
@@ -12,23 +11,42 @@ public class Drug {
         this.dosage = dosage;
     }
 
-    public int getDrugId() { return drugId; }
-    public String getDrugName() { return drugName; }
-    public double getDrugCost() { return drugCost; }
-    public String getDosage() { return dosage; }
+    // Getters and Setters
+    public int getDrugId() {
+        return drugId;
+    }
+
+    public void setDrugId(int drugId) {
+        this.drugId = drugId;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public double getDrugCost() {
+        return drugCost;
+    }
+
+    public void setDrugCost(double drugCost) {
+        this.drugCost = drugCost;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
 
     @Override
     public String toString() {
-        return drugId + "," + drugName + "," + drugCost + "," + dosage;
-    }
-
-    public static Drug fromString(String line) {
-        String[] parts = line.split(",");
-        return new Drug(
-            Integer.parseInt(parts[0]),
-            parts[1],
-            Double.parseDouble(parts[2]),
-            parts[3]
-        );
+        return "Drug ID: " + drugId + ", Name: " + drugName + 
+               ", Cost: $" + drugCost + ", Dosage: " + dosage;
     }
 }
