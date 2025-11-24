@@ -1,23 +1,30 @@
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/yourdbname";
-    private static final String USER = "jeffwoolridge";
-    private static final String PASSWORD = "yourpassword";
+    private static final String URL = "jdbc:postgresql://localhost:5432/pharmacydb"; // change DB name if needed
+    private static final String USER = "jeffwoolridge"; // your DB user
+    private static final String PASSWORD = "yourpassword"; // your DB password
 
+    // Save a Patient to the database
     public static void savePatient(Patient patient) {
         String sql = "INSERT INTO patients (patient_id, first_name, last_name, dob) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, patient.getPatientId());
+            stmt.setString(1, patient.getPatientId()); // patient_id is now a string (e.g., "P1")
             stmt.setString(2, patient.getPatientFirstName());
             stmt.setString(3, patient.getPatientLastName());
-            stmt.setString(4, patient.getPatientDOB());
+
+            // Convert DOB string to java.sql.Date
+            LocalDate localDate = LocalDate.parse(patient.getPatientDOB(), DateTimeFormatter.ISO_LOCAL_DATE);
+            Date sqlDate = Date.valueOf(localDate);
+            stmt.setDate(4, sqlDate);
 
             stmt.executeUpdate();
             System.out.println("Patient saved successfully!");
@@ -27,6 +34,7 @@ public class DatabaseHandler {
         }
     }
 
+    // Read all patients from the database
     public static List<Patient> readPatients() {
         List<Patient> patients = new ArrayList<>();
         String sql = "SELECT patient_id, first_name, last_name, dob FROM patients";
@@ -36,13 +44,13 @@ public class DatabaseHandler {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Patient patient = new Patient(
-                    rs.getString("patient_id"), 
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("dob")
-                );
+                String id = rs.getString("patient_id");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                Date dobDate = rs.getDate("dob");
+                String dob = dobDate.toLocalDate().toString();
 
+                Patient patient = new Patient(id, firstName, lastName, dob);
                 patients.add(patient);
             }
 

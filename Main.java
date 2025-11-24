@@ -9,7 +9,7 @@ public class Main {
         int choice;
 
         do {
-            System.out.println("\n=== Pharmacy Management Menu ===");
+            System.out.println("\n Pharmacy Management Menu ");
             System.out.println("1. Save Drug to file");
             System.out.println("2. Read Drugs from file");
             System.out.println("3. Save Patient to database");
@@ -77,7 +77,6 @@ public class Main {
     Patient patient = new Patient(id, firstName, lastName, dob);
     DatabaseHandler.savePatient(patient);
 }
-
 
     private static void readPatients() {
         List<Patient> patients = DatabaseHandler.readPatients();
