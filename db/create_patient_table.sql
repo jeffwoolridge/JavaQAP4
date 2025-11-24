@@ -1,6 +1,5 @@
 -- create_patients_table.sql
 
--- Create database (optional if not already created)
 -- CREATE DATABASE pharmacydb;
 
 -- Connect to your database
