@@ -1,2 +1,0 @@
-P1,tylonol,400.0,40
-D3,aspirin,200.0,20

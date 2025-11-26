@@ -9,7 +9,7 @@ public class Main {
         int choice;
 
         do {
-            System.out.println("\n Pharmacy Management Menu ");
+            System.out.println("\n Please choose an option:");
             System.out.println("1. Save Drug to file");
             System.out.println("2. Read Drugs from file");
             System.out.println("3. Save Patient to database");
@@ -26,7 +26,7 @@ public class Main {
                 case 3 -> savePatient();
                 case 4 -> readPatients();
                 case 0 -> System.out.println("Exiting...");
-                default -> System.out.println("Invalid choice!");
+                default -> System.out.println("Invalid choice.");
             }
         } while (choice != 0);
     }
@@ -45,7 +45,7 @@ public class Main {
                 cost = Double.parseDouble(input);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number.");
+                System.out.println("");
             }
         }
 
@@ -66,7 +66,7 @@ public class Main {
 
     private static void savePatient() {
     System.out.print("Enter Patient ID: ");
-    String id = scanner.nextLine();  // changed from nextInt() to nextLine()
+    String id = scanner.nextLine();  
     System.out.print("Enter First Name: ");
     String firstName = scanner.nextLine();
     System.out.print("Enter Last Name: ");

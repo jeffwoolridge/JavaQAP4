@@ -1,5 +1,5 @@
 public class Patient {
-    private final String patientId;  // changed from int to String
+    private final String patientId; 
     private final String patientFirstName;
     private final String patientLastName;
     private final String patientDOB;

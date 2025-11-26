@@ -6,18 +6,17 @@ import java.util.List;
 
 public class DatabaseHandler {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/pharmacydb"; // change DB name if needed
-    private static final String USER = "jeffwoolridge"; // your DB user
-    private static final String PASSWORD = "yourpassword"; // your DB password
-
-    // Save a Patient to the database
+    private static final String URL = "jdbc:postgresql://localhost:5432/pharmacydb";  // DB URI
+    private static final String USER = "jeffwoolridge"; // DB user
+    private static final String PASSWORD = "yourpassword"; // DB password
     public static void savePatient(Patient patient) {
         String sql = "INSERT INTO patients (patient_id, first_name, last_name, dob) VALUES (?, ?, ?, ?)";
 
+        // Save patient to the database
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, patient.getPatientId()); // patient_id is now a string (e.g., "P1")
+            stmt.setString(1, patient.getPatientId()); 
             stmt.setString(2, patient.getPatientFirstName());
             stmt.setString(3, patient.getPatientLastName());
 
