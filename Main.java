@@ -33,6 +33,13 @@ public class Main {
 
     private static void saveDrug() {
         System.out.print("Enter Drug ID: ");
+        try {
+            
+
+        } catch (Exception e) {
+            System.err.println("ID must be alphanumeric.");
+        }
+            
         String id = scanner.nextLine();
         System.out.print("Enter Drug Name: ");
         String name = scanner.nextLine();
@@ -58,7 +65,7 @@ public class Main {
 
     private static void readDrugs() {
         List<Drug> drugs = FileHandler.readDrugs();
-        System.out.println("\n--- Drug List ---");
+        System.out.println("\nDrug List:");
         for (Drug d : drugs) {
             System.out.println(d);
         }
@@ -80,7 +87,7 @@ public class Main {
 
     private static void readPatients() {
         List<Patient> patients = DatabaseHandler.readPatients();
-        System.out.println("\n--- Patient List ---");
+        System.out.println("\n Patient List");
         for (Patient p : patients) {
             System.out.println(p);
         }
